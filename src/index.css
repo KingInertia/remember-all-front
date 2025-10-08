@@ -1,1 +1,28 @@
 @import "tailwindcss";
+/* //#145757  133835*/
+@theme {
+  --color-primary: #00FFDE;
+  --color-primaryDark: #124175;
+  --color-secondary: #133835; 
+  --color-textWhite: #D9FFF9;
+  --color-primaryBlocks: #0A2239;
+  --color-lightningWhite: #66FFE9;
+  --container-center: true;
+  --container-padding: 1rem;
+  --container-padding-sm: 2rem;
+}
+
+@layer base {
+  .text-outline {
+    -webkit-text-stroke: 3px #D9FFF9;
+  }
+
+}
+
+@layer components {
+  .rounded-icon {
+    @apply h-[32px] w-[32px] flex rounded-full items-center justify-center cursor-pointer
+               bg-primary/30 p-2 hover:scale-110 duration-200;
+  }
+  
+}
