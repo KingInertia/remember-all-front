@@ -15,7 +15,7 @@ const RegistrationPopup = ({onClick}:PopupProps) => {
  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const login = data.get('login');
+    const login = data.get('login') as string | null;
     const email = data.get('email') as string | null;
     const password = data.get('password') as string | null;
     const confirmPassword = data.get('confirmPassword');
@@ -38,7 +38,7 @@ const RegistrationPopup = ({onClick}:PopupProps) => {
 
     setLoadingState(LOADINGSTATES.LOADING);
     try {
-      await registerUser({ username: login.toString(), email: email.toString(), password: password.toString() });
+    await registerUser({ username: login, email: email, password: password });
       setLoadingState(LOADINGSTATES.SUCCESS);
       onClick();
     } catch (error) {

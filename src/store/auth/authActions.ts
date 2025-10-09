@@ -5,7 +5,7 @@ export const registerUser = async (userData: { username: string; email: string; 
     return response.data;
 }
 
-export const loginUser = async (credentials: { email: string; password: string }) => {
+export const loginUser = async (credentials: { username: string; password: string }) => {
     const response = await axiosInstance.post("/auth/jwt/create/", credentials);
     return response.data;
 }
