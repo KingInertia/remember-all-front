@@ -29,7 +29,6 @@ e.preventDefault()
 const data = new FormData(e.currentTarget)
 const username = data.get('username') as string | null
 const password = data.get('password') as string | null
-console.log(username, password)
 if (!username || !password) {
   return;
 }
@@ -43,7 +42,6 @@ dispatch(setAuthToken({ accessToken: access, refreshToken: refresh }));
 navigate('/')
 } catch (error) {
 setLoadingState(LOADINGSTATES.IDLE);
-  console.error("Login failed:", error);
 }
 }
 

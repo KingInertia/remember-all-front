@@ -15,7 +15,7 @@ export const logoutUser = async () => {
     return response.data;
 }
 
-export const refreshToken = async (token: string) => {
-    const response = await axiosInstance.post("/auth/jwt/create/", { token });
+export const verifyToken = async (token: string) => {
+    const response = await axiosInstance.post("/auth/jwt/verify/", { token });
     return response.data;
 }

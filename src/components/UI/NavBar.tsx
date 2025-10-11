@@ -1,4 +1,3 @@
-import React from 'react'
 import Kniga from '../../assets/images/book-img3.png'
 import { FaUser } from "react-icons/fa";
 import Button from './Button'
