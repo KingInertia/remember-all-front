@@ -21,7 +21,7 @@
 
 @layer components {
   .rounded-icon {
-    @apply h-[32px] w-[32px] flex rounded-full items-center justify-center cursor-pointer
+    @apply h-[34px] w-[34px] flex rounded-full items-center justify-center cursor-pointer
                bg-primary/30 p-2 hover:scale-110 duration-200;
   }
   

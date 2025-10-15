@@ -37,7 +37,7 @@ const navigate = useNavigate()
  <div className='relative'>
    <img src={BookImg} alt="" className='opacity-82 w-full relative z-5 md:scale-125 mb-18'/>
 
-<Button onClick={()=> navigate('/auth')} className='absolute bottom-1/7 left-1/2 -translate-x-1/2 text-xl font-medium rounded-xl z-10'><div className='flex items-center space-x-3'><p>Explore</p> <FaArrowRight /> </div></Button>
+<Button onClick={()=> navigate('/auth')} className='px-6 py-2 absolute bottom-1/7 left-1/2 -translate-x-1/2 text-xl font-medium rounded-xl z-10'><div className='flex items-center space-x-3'><p>Explore</p> <FaArrowRight /> </div></Button>
  
  </div>
         </div>
