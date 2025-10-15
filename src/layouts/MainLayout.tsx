@@ -1,38 +1,32 @@
 import { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import StarsBg from '../components/UI/StarsBg'
-import Navbar from '../components/UI/Navbar';
+import { Outlet, useLocation } from 'react-router-dom';
+import StarsBg from '@/components/UI/StarsBg'
+import Navbar from '@/components/UI/Navbar';
 import { useDispatch } from 'react-redux';
-import { setAuthToken, logout } from '../store/auth/authSlice';
-import { verifyToken } from '../store/auth/authActions';
+import { setAuthToken, logout} from '@/store/auth/authSlice';
+import { verifyToken } from '@/store/auth/authActions';
 
 const MainLayout = () => {
 const dispatch = useDispatch();
+const location = useLocation();
+const hideNavbarPaths = ['/notes'];
+const shouldHideNavbar = hideNavbarPaths.some(path => location.pathname.startsWith(path));
 
   useEffect(() => {
     const refreshToken = localStorage.getItem('refreshToken');
     const accessToken = localStorage.getItem('token');
 
-   const validateAndSet = async () => {
-    if (!accessToken) return;
-    try {
-      const isValid = await verifyToken(accessToken); 
-      if (isValid) {
-        dispatch(setAuthToken({ refreshToken, accessToken }));
-      }
-    }catch (error) {
-      dispatch(logout());
+    if (refreshToken && accessToken) {
+      dispatch(setAuthToken({ accessToken, refreshToken }));
     }
 
-    };
-    validateAndSet();
   }, [dispatch]);
 
   return (
     <div>
         <StarsBg/>
-        <div className='z-5 container mx-auto md:px-0 px-4'>
-        <Navbar/>
+        <div className='z-5 relative md:px-0 px-4'>
+        {!shouldHideNavbar && <Navbar/>}
    <Outlet />
         </div>
     </div>

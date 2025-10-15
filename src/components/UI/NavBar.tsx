@@ -1,21 +1,23 @@
-import Kniga from '../../assets/images/book-img3.png'
+import Kniga from '@/assets/images/book-img3.png'
 import { FaUser } from "react-icons/fa";
 import Button from './Button'
 import { useNavigate } from 'react-router-dom';
+import { selectAccessToken } from '@/store/auth/authSelector';
+import { useSelector } from 'react-redux';
 
 
 const NavMenu = [
   { id: 1, title: "Home", link: "" },
-  { id: 2, title: "Auth", link: "auth" },
-  { id: 3, title: "Bikes", link: "services" },
-  { id: 4, title: "Cars", link: "contact" },
+  { id: 2, title: "About", link: "about" },
+  { id: 3, title: "Guide", link: "guide" },
 ];
 
 const NavBar = () => {
   const navigate = useNavigate()
+    const accessToken = useSelector(selectAccessToken)
 
   return (
-      <div  className='relative'>
+      <div  className='relative container mx-auto'>
         <div  className='absolute top-0 left-0 w-full z-20 md-pt-10 pt-4'>
             <div className='container'>
             <div className='flex justify-between items-center'>
@@ -32,6 +34,9 @@ const NavBar = () => {
                             </li>
                     ))
                     }
+                    {accessToken && (<li>
+                        <Button onClick={() => {navigate('/notes')}} >MY NOTES</Button>
+                    </li>) }
                 </ul>
                 </div>
 

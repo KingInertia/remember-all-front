@@ -12,7 +12,7 @@ const PrivateRouter = () => {
     if (token) {
         return <Outlet />;
     }
-    return <Navigate to="/login" replace/>;
+    return <Navigate to="/auth" replace/>;
 }
 
 export default PrivateRouter
