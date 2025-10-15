@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import StarsBg from '@/components/UI/StarsBg'
-import Navbar from '@/components/UI/Navbar';
+import Navbar from '@/components/UI/NavBar/NavBar';
 import { useDispatch } from 'react-redux';
 import { setAuthToken, logout} from '@/store/auth/authSlice';
 import { verifyToken } from '@/store/auth/authActions';

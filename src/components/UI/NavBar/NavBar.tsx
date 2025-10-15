@@ -1,9 +1,9 @@
 import Kniga from '@/assets/images/book-img3.png'
-import { FaUser } from "react-icons/fa";
-import Button from './Button'
+import Button from '../Button'
 import { useNavigate } from 'react-router-dom';
 import { selectAccessToken } from '@/store/auth/authSelector';
 import { useSelector } from 'react-redux';
+import UserMenu from './UserMenu';
 
 
 const NavMenu = [
@@ -42,9 +42,7 @@ const NavBar = () => {
 
                 {/* Hamburger menu */}
                 <div className='text-textWhite text-lg flex gap-6'>
-                    <div className='rounded-icon  border-primary border-2 cursor-pointer'>
-                        <FaUser />
-                    </div>
+                    <UserMenu />
                     <div className='rounded-icon border-2 border-primary cursor-pointer'>
                         <h1 className=' text-xs font-bold'>EN</h1>
                     </div>
