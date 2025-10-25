@@ -1,4 +1,4 @@
-import Kniga from '@/assets/images/book-img3.png'
+import bookImg from '@/assets/images/book-img3.png'
 import Button from '../Button'
 import { useNavigate } from 'react-router-dom';
 import { selectIsAuntificated } from '@/store/auth/authSelector';
@@ -23,11 +23,11 @@ const NavBar = () => {
             <div className='grid grid-cols-3 items-center'>
                 {/* logo */}
                 <div>
-                    <img onClick={()=>navigate('/')} src={Kniga} alt="" className='md:w-[100px] w-[80px] rounded-xl opacity-95'/>
+                    <img onClick={()=>navigate('/')} src={bookImg} alt="" className='md:w-[100px] w-[80px] rounded-xl opacity-95'/>
                 </div>
                 {/* NavMenu */}
                 <div className='hidden  md:block text-textWhite text-lg '>
-                <ul className='flex gap-8 justify-center '>
+                <ul className='flex gap-8  justify-center '>
                     {NavMenu.map((item) => (
                         <li key={item.id}>
                             <Button className='uppercase px-6 py-2 font-medium' onClick={() => {navigate(`/${item.link}`)}}>{item.title}</Button>
@@ -35,7 +35,7 @@ const NavBar = () => {
                     ))
                     }
                     {isAuntificated && (<li>
-                        <Button className='uppercase px-6 py-2 font-medium' onClick={() => {navigate('/notes')}} >MY NOTES</Button>
+                        <Button className='uppercase px-6 py-2 font-medium whitespace-nowrap' onClick={() => {navigate('/notes')}} >my notes</Button>
                     </li>) }
                 </ul>
                 </div>

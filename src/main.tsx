@@ -4,6 +4,8 @@ import './index.css'
 import App from './App.tsx'
 import { Provider } from 'react-redux'
 import store from './store/store.ts'
+import "@blocknote/core/fonts/inter.css";
+import "@blocknote/mantine/style.css";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

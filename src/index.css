@@ -5,8 +5,12 @@
   --color-primaryDark: #124175;
   --color-secondary: #133835; 
   --color-textWhite: #D9FFF9;
+  --color-textOrange: #F9ECCC;
+  --color-textBoxWhite: #D9FFF9;
+  --color-blockNoteMenu: #0E2B28;
   --color-primaryBlocks: #0A2239;
   --color-lightningWhite: #66FFE9;
+  --color-neonRed: #FF2E63;
   --container-center: true;
   --container-padding: 1rem;
   --container-padding-sm: 2rem;
@@ -25,4 +29,33 @@
                bg-primary/30 p-2 hover:scale-110 duration-200;
   }
   
+}
+
+
+/* Указываем, что именно contenteditable является прокручиваемой областью */
+.my-blocknote [contenteditable="true"] {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* плавный скролл на мобильных */
+  scrollbar-width: thin; /* firefox */
+  scrollbar-color: rgba(100,100,100,0.6) transparent; /* firefox */
+}
+
+/* Webkit (Chrome, Edge, Safari) — стили ползунка */
+.my-blocknote [contenteditable="true"]::-webkit-scrollbar {
+  width: 10px;
+}
+.my-blocknote [contenteditable="true"]::-webkit-scrollbar-track {
+  background: transparent;
+}
+.my-blocknote [contenteditable="true"]::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.4);
+  background-clip: padding-box;
+}
+
+/* При необходимости убрать паддинги/маргины, которые «выталкивают» скролл наружу */
+.my-blocknote [contenteditable="true"] {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; /* откорректируйте если нужно */
 }
