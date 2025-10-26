@@ -20,6 +20,8 @@ const NoteAddButton = () => {
 
   const handleCreate = async () => {
     await dispatch(createNewNote(text))
+    if(status == LOADINGSTATES.SUCCESS)
+        setOpenCreating(false)
   };
 
   const handleCancel = () => {

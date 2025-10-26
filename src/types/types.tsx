@@ -1,10 +1,15 @@
+
+export interface NoteHistory {
+  id: number;
+  title: string;
+}
+
 export interface User {
   id: number;
   username: string;
   email: string;
-  notesHistory: number | null; 
+  notes_history: NoteHistory[] | null; 
 }
-
 
   export interface NoteImage {
   id: number;

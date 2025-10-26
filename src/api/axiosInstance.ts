@@ -20,10 +20,8 @@ axiosInstance.interceptors.request.use((config) => {
 })
 
 axiosInstance.interceptors.response.use(response => response, async (error) => {
-    console.log("INTERCEPTOR:");
     const originalRequest = error.config;
     if (error.response?.status === 401 && !originalRequest._retry) {
-        console.log("INTERCEPTOR: 401 error detected, attempting token refresh");
         originalRequest._retry = true;
         try {
             const refreshToken = store.getState().auth.refreshToken;

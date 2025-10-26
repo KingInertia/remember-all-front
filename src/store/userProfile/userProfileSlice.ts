@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import LOADINGSTATES from "@/constans/LoadingStates";
 import { getUserProfile } from "./userProfileActions";
 import type { User } from '@/types/types';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface UserProfileState {
   user: User | null;
@@ -13,7 +14,6 @@ const initialState: UserProfileState = {
     user: null,
     status: LOADINGSTATES.IDLE,
     error: '',
-
 }
 
 const userProfileSlice = createSlice({
@@ -24,7 +24,15 @@ const userProfileSlice = createSlice({
             state.user = null;
             state.status = LOADINGSTATES.IDLE;
             state.error = '';
-        }
+        },
+        updateNotesHistory(
+            state, 
+            action: PayloadAction<{ id: number; title: string }>
+            ) {
+            if (state.user?.notes_history) {
+                state.user.notes_history.push(action.payload);
+  }
+            }
     },
     extraReducers: (builder) => {
         builder
