@@ -32,30 +32,26 @@
 }
 
 
-/* Указываем, что именно contenteditable является прокручиваемой областью */
-.my-blocknote [contenteditable="true"] {
-  height: 100%;
+.green-scroll-bar  {
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* плавный скролл на мобильных */
-  scrollbar-width: thin; /* firefox */
-  scrollbar-color: rgba(100,100,100,0.6) transparent; /* firefox */
+  -webkit-overflow-scrolling: touch; 
+  scrollbar-width: thin; 
+  scrollbar-color: rgba(100,100,100,0.6) transparent; 
 }
 
-/* Webkit (Chrome, Edge, Safari) — стили ползунка */
-.my-blocknote [contenteditable="true"]::-webkit-scrollbar {
+.green-scroll-bar ::-webkit-scrollbar {
   width: 10px;
 }
-.my-blocknote [contenteditable="true"]::-webkit-scrollbar-track {
+.green-scroll-bar [contenteditable="true"]::-webkit-scrollbar-track {
   background: transparent;
 }
-.my-blocknote [contenteditable="true"]::-webkit-scrollbar-thumb {
+.green-scroll-bar [contenteditable="true"]::-webkit-scrollbar-thumb {
   background-color: rgba(0,0,0,0.4);
   background-clip: padding-box;
 }
 
-/* При необходимости убрать паддинги/маргины, которые «выталкивают» скролл наружу */
 .my-blocknote [contenteditable="true"] {
   box-sizing: border-box;
   margin: 0;
-  padding: 0; /* откорректируйте если нужно */
+  padding: 0; 
 }

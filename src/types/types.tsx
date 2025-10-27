@@ -1,5 +1,5 @@
 
-export interface NoteHistory {
+ export interface NoteHistory {
   id: number;
   title: string;
 }
@@ -16,7 +16,6 @@ export interface User {
   image: string; 
 }
 
-
 export interface Note {
   id: number;
   title: string;
@@ -24,4 +23,9 @@ export interface Note {
     links_out: number[];
   links_in: number[];
   images?: NoteImage[] | null;
+}
+
+export interface ListNote{
+  id: number;
+  title: string;
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BlockNoteView } from "@blocknote/mantine";
 import { useCreateBlockNote } from "@blocknote/react";
 import { lightRedTheme } from "./NoteTheme";
@@ -8,34 +8,45 @@ import type { Note } from "@/types/types";
 type NoteProps = {
   noteContent: string;
   noteId: number;
+  previousId: number;
 }
 
-  const Note = ({ noteContent, noteId }: NoteProps) => {
+  const Note = ({ noteContent, noteId, previousId}: NoteProps) => {
     const [editMode, setEditMode] = useState(true);
     const [fontSize, setFontSize] = useState(20);
     const editor = useCreateBlockNote();
+    const saveOrLoading = useRef(true);
 
     useEffect(() => {
-      if (!noteContent) return;
-
+      saveOrLoading.current = true;
       const setText= async ()=>{
       try {
+
+        const text = await editor.blocksToMarkdownLossy(editor.document);
+        if(text){
+        await changeNote({id:previousId, content: text})
+        }
         const blocks = await editor.tryParseMarkdownToBlocks(noteContent as string);
-           editor.replaceBlocks(editor.document, blocks);
+           await editor.replaceBlocks(editor.document, blocks);
+           saveOrLoading.current = false;
            } catch(e){
             console.log("markdown parse error")
            }
       }
       setText()
-    },[noteContent])
+    },[noteContent, noteId])
 
 
 useEffect(() => {
-  if (!editor) return;
+  if (!editor || saveOrLoading.current) return;
 
   let timeout: NodeJS.Timeout;
-  
+
   const handleChange =  () => {
+    if (saveOrLoading.current) {
+      return; 
+    }
+
     clearTimeout(timeout);
     
     timeout = setTimeout( async () => {
@@ -59,7 +70,7 @@ useEffect(() => {
     <div className="relative flex-1 rounded-4xl border-2 border-primary bg-secondary/90 overflow-hidden">
       <div className="absolute inset-0 my-1 mr-3 ml-4">
         <BlockNoteView
-          className="my-blocknote"
+          className="my-blocknote green-scroll-bar"
           editor={editor}
           theme={lightRedTheme}
           sideMenu={false}

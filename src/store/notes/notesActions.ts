@@ -2,12 +2,16 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "@/api/axiosInstance";
 import type { Note } from "@/types/types";
 
-export const createNewNote = createAsyncThunk(
-    "user/createNote",
-    async ( title: string , {rejectWithValue}) => {
+export const createNewNote = async (title: string ) => {
+  const response = await axiosInstance.post(`/notes/`, {title: title});
+  return response.data;
+};
+
+export const getNote = createAsyncThunk(
+    "user/getNote",
+    async ( id: number , {rejectWithValue}) => {
         try {
-            const {data} = await axiosInstance.post("/notes/", 
-                {title}
+            const {data} = await axiosInstance.get(`/notes/${id}/`
             );
             return data;
         } catch (error: any) {
@@ -20,11 +24,11 @@ export const createNewNote = createAsyncThunk(
     }
 );
 
-export const getNote = createAsyncThunk(
-    "user/getNote",
-    async ( id: number , {rejectWithValue}) => {
+export const getNotesList = createAsyncThunk(
+    "user/getNotesList",
+    async ( _ , {rejectWithValue}) => {
         try {
-            const {data} = await axiosInstance.get(`/notes/${id}/`
+            const {data} = await axiosInstance.get('/notes/'
             );
             return data;
         } catch (error: any) {

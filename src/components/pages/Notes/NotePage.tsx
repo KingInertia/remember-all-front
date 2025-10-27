@@ -2,55 +2,50 @@ import Note from "./Note/Note"
 import { useEffect, useState } from "react";
 import NoteSearch from "./UI/NoteSearch"
 import NoteAddButton from "./UI/NoteAddButton"
+import NoteTitle from "./UI/NoteTitle";
 import LeftMenu from "./LeftMenu/LeftMenu"
 import RightMenu from "./RightMenu/RightMenu"
-import {selectUserProfile} from "@/store/userProfile/userProfileSelector";
-import { selectNotes, selectNoteStatus } from "@/store/notes/notesSelector"
+import {selectUserNotesHistory} from "@/store/userProfile/userProfileSelector";
+import { selectNote, selectNoteStatus } from "@/store/notes/notesSelector"
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import { getNote } from "@/store/notes/notesActions";
-import type { User, Note as NoteType } from "@/types/types";
+import { useNavigate, useParams } from "react-router-dom";
+
 
 const NotePage = () => {
-  const user = useAppSelector(selectUserProfile) as User;
-  const notes = useAppSelector(selectNotes);
-  const status = useAppSelector(selectNoteStatus);
-    const [currentNote, setCurrentNote] = useState<NoteType | null>(null);useState(null);
+  const notes_history = useAppSelector(selectUserNotesHistory) ;
+  const note = useAppSelector(selectNote);
   const dispatch = useAppDispatch()
+    const navigate = useNavigate();
+  const { id } = useParams();
 
-    useEffect(() => {
-    if (!user || currentNote!= null)
+useEffect(() => {
+    if (!notes_history) return;
+
+    if (!id) {
+      const lastNoteId = notes_history?.[0]?.id;
+        navigate(`/notes/${lastNoteId}`, { replace: true });
       return;
+    }
+      dispatch(getNote(Number(id)));
 
-      const getLastNote = async () =>
-      {
-        if (user?.notes_history?.[0]) {
-         await dispatch(getNote(user.notes_history[0].id))
-        }
-      }
-      getLastNote()
+  }, [ id, dispatch, navigate]);
 
-    },[user, dispatch])
-
-    useEffect(()=>{
-                if (notes?.length) {
-            setCurrentNote(notes[notes.length - 1])
-        }
-    },[notes])
-    
   return (
 <div className="h-screen flex items-center">
   <div className="grid grid-cols-4 gap-8 p-4 h-[950px] w-full items-stretch">
     <div className="col-span-1 ">
-      <LeftMenu />
+      <LeftMenu notesHistory={ notes_history ?? []}/>
     </div>
 
     <div className="col-span-2 mx-4 flex flex-col h-full">
       <div className="flex justify-between items-center gap-4">
+        {note && <NoteTitle noteTitle={note?.title} noteId={note?.id}/>}
         <NoteSearch />
-{        <NoteAddButton />
-}      </div>
+       <NoteAddButton />
+      </div>
         <div className="flex-1 min-h-0">
-    {currentNote && <Note noteContent={currentNote.content || ''} noteId={currentNote.id}/>}
+    {note && <Note noteContent={note.content || ''} noteId={note.id} previousId={notes_history[1].id}/>}
   </div>
     </div>
 

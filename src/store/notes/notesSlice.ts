@@ -1,20 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import LOADINGSTATES from "@/constans/LoadingStates";
-import { createNewNote, getNote } from "./notesActions";
-import type { Note } from "@/types/types";
-import type { PayloadAction } from '@reduxjs/toolkit';
+import { getNote, getNotesList } from "./notesActions";
+import type { Note, ListNote } from "@/types/types";
 
 
 interface NoteState {
-    notes: Note[]           
+    note: Note | null           
     status: typeof LOADINGSTATES[keyof typeof LOADINGSTATES];
     error: string;
+    notes: ListNote[]
 }
 
 const initialState: NoteState = {
-    notes: [],   //SHOULD change to notes[]
-        status: LOADINGSTATES.IDLE,
+    note: null,   
+    status: LOADINGSTATES.IDLE,
     error: '',
+    notes: []
+
 }
 
 const notesSlice = createSlice({
@@ -23,31 +25,6 @@ initialState,
 reducers: {},
 extraReducers: builder => {
     builder
-    .addCase(createNewNote.pending, (state) =>
-{
-      state.status = LOADINGSTATES.LOADING;
-            state.error = '';
-}
-)
-    .addCase(createNewNote.fulfilled, (state, {payload}) =>
-{
-      state.status = LOADINGSTATES.SUCCESS;
-          const existingIndex = state.notes.findIndex(note => note.id === payload.id);
-
-            if (existingIndex !== -1) {
-                state.notes.splice(existingIndex, 1, payload);
-            } else {
-                state.notes.push(payload);
-            }
-}
-)
-    .addCase(createNewNote.rejected, (state, {payload}) =>
-{
-      state.status = LOADINGSTATES.FAILED;
-            state.error = (payload as string) || 'Unknown error';
-}
-)
-
     .addCase(getNote.pending, (state) =>
 {
       state.status = LOADINGSTATES.LOADING;
@@ -57,13 +34,7 @@ extraReducers: builder => {
     .addCase(getNote.fulfilled, (state, {payload}) =>
 {
       state.status = LOADINGSTATES.SUCCESS;
-          const existingIndex = state.notes.findIndex(note => note.id === payload.id);
-
-            if (existingIndex !== -1) {
-                state.notes.splice(existingIndex, 1, payload);
-            } else {
-                state.notes.push(payload);
-            }
+       state.note = payload
 }
 )
     .addCase(getNote.rejected, (state, {payload}) =>

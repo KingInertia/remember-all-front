@@ -15,7 +15,8 @@ const App = () => {
       <Route index element={<StartPage />} />
       <Route path="/auth" element={<AuthorizationPage />} />
       <Route element={<PrivateRouter />}>
-      <Route path="/notes" element={<NotePage />} />
+       <Route path="notes" element={<NotePage />} />
+       <Route path="notes/:id" element={<NotePage />} />
       </Route>
       </Route>
 </Routes>

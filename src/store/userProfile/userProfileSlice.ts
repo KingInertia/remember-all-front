@@ -25,14 +25,15 @@ const userProfileSlice = createSlice({
             state.status = LOADINGSTATES.IDLE;
             state.error = '';
         },
-        updateNotesHistory(
-            state, 
-            action: PayloadAction<{ id: number; title: string }>
-            ) {
+        updateNotesHistory(state, action: PayloadAction<{ id: number; title: string }>) {
             if (state.user?.notes_history) {
-                state.user.notes_history.push(action.payload);
-  }
+                state.user.notes_history = state.user.notes_history.filter(
+                note => note.id !== action.payload.id
+                );
+                state.user.notes_history.unshift(action.payload);
             }
+            }
+
     },
     extraReducers: (builder) => {
         builder
@@ -54,4 +55,4 @@ const userProfileSlice = createSlice({
 });
 
 export default userProfileSlice.reducer;
-export const { logoutUser } = userProfileSlice.actions;
+export const { logoutUser, updateNotesHistory } = userProfileSlice.actions;

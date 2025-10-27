@@ -1,16 +1,20 @@
 import { IoIosAdd } from "react-icons/io";
 import { useState, useRef, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import {  useAppSelector } from "@/hooks/hooks";
 import { createNewNote } from "@/store/notes/notesActions";
 import LOADINGSTATES from "@/constans/LoadingStates";
 import { selectNoteStatus } from "@/store/notes/notesSelector";
+import { useNavigate } from "react-router-dom";
+import { updateNotesHistory } from "@/store/userProfile/userProfileSlice";
+import { useDispatch } from "react-redux";
 
 const NoteAddButton = () => {
   const [openCreating, setOpenCreating] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [text, setText] = useState('');
-  const dispatch = useAppDispatch()
   const status = useAppSelector(selectNoteStatus)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
     useEffect(() => {
     if (openCreating) {
@@ -18,11 +22,19 @@ const NoteAddButton = () => {
     }
   }, [openCreating]);
 
-  const handleCreate = async () => {
-    await dispatch(createNewNote(text))
-    if(status == LOADINGSTATES.SUCCESS)
-        setOpenCreating(false)
-  };
+const handleCreate = async () => {
+  try{
+    const newNote = await createNewNote(text);
+    handleCancel()
+    dispatch(updateNotesHistory({
+  id: newNote.id,
+  title: newNote.title
+}));
+    navigate(`/notes/${newNote.id}`, { replace: true });
+  }catch(e){
+
+  }
+};
 
   const handleCancel = () => {
     setOpenCreating(false)
@@ -30,11 +42,11 @@ const NoteAddButton = () => {
   }
 
   return (
-    <div className={`text-textWhite  border-2 border-primary rounded-3xl
+    <div className={`text-textWhite  border-2 border-primary/90 rounded-3xl 
                   px-4 py-1 flex items-center justify-center
                   h-[46px]
                   transition-all duration-250 ease-in-out overflow-hidden
-                 ${openCreating ? "w-[430px]" : "w-[150px] hover:shadow-[0px_0px_20px_8px_#66FFE9] cursor-pointer"}
+                 ${openCreating ? "w-[600px]" : "w-[150px] hover:shadow-[0px_0px_20px_8px_#66FFE9] cursor-pointer"}
       `}>
     {!openCreating ? 
     (
@@ -47,14 +59,14 @@ const NoteAddButton = () => {
          </div> 
          </button>
          ) :
-         (<div className='flex items-center justify-between w-full space-x-4'>
+         (<div className='flex items-center justify-between w-full space-x-4 '>
             <input type="text"
              
             value={text}
             ref={inputRef}
             onChange={(e) => setText(e.target.value)}
             placeholder={status != LOADINGSTATES.LOADING ? 'Note title': 'Creating new note...'} 
-            className="font-medium bg-transparent outline-none  placeholder:text-gray-400 text-textBoxWhite flex-1 border-b-2 border-primary/60"
+            className="font-medium bg-transparent outline-none w-full  placeholder:text-gray-400 text-textBoxWhite  border-b-2 border-primary/60"
             onKeyDown={(e) => {
               if (e.key === 'Enter') handleCreate();
               if (e.key === 'Escape') handleCancel();

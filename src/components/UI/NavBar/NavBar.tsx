@@ -23,7 +23,7 @@ const NavBar = () => {
             <div className='grid grid-cols-3 items-center'>
                 {/* logo */}
                 <div>
-                    <img onClick={()=>navigate('/')} src={bookImg} alt="" className='md:w-[100px] w-[80px] rounded-xl opacity-95'/>
+                    <img onClick={()=>navigate('/')} src={bookImg} alt="" className='md:w-[100px] w-[80px] rounded-xl opacity-95 scale-110'/>
                 </div>
                 {/* NavMenu */}
                 <div className='hidden  md:block text-textWhite text-lg '>
