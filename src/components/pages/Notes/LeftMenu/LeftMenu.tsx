@@ -46,14 +46,13 @@ const LeftMenu = ({notesHistory}:NoteProps) => {
               </li>
             ))
           ) : (
-            <li className="text-gray-400">Нет заметок</li>
+            <li className="text-gray-400">No notes history</li>
           )}
 
         </ul>
           </div>
       </div>
   <div className="flex-1 rounded-4xl border-2 border-primary/90 bg-blockNoteMenu/75 mt-4">
-    Блок 2
   </div>
 </div>
 

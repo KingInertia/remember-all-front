@@ -45,7 +45,7 @@ useEffect(() => {
        <NoteAddButton />
       </div>
         <div className="flex-1 min-h-0">
-    {note && <Note noteContent={note.content || ''} noteId={note.id} previousId={notes_history[1].id}/>}
+    {note && <Note noteContent={note.content || ''} noteId={note.id} previousId={notes_history?.[1]?.id}/>}
   </div>
     </div>
 

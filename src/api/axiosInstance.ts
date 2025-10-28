@@ -10,9 +10,7 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {
-    console.log("INTERCEPTOR: Adding Authorization header if accessToken exists");
     const token = store.getState().auth.accessToken;
-    console.log("Current accessToken:", token);
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
@@ -25,7 +23,6 @@ axiosInstance.interceptors.response.use(response => response, async (error) => {
         originalRequest._retry = true;
         try {
             const refreshToken = store.getState().auth.refreshToken;
-            console.log(refreshToken)
             if (refreshToken) {
                 const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/jwt/refresh/`, { refresh: refreshToken });
                 store.dispatch({ type: 'auth/setAuthToken', payload: { accessToken: response.data.access, refreshToken } });
