@@ -10,7 +10,6 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {
-    console.log("INTERCEPTOR: Adding Authorization header if accessToken exists");
     const token = store.getState().auth.accessToken;
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
@@ -32,6 +31,7 @@ axiosInstance.interceptors.response.use(response => response, async (error) => {
             }
         } catch (error) {
             store.dispatch({ type: 'auth/logout' });
+            window.location.href = '/auth';
             return Promise.reject(error);
         }
     }

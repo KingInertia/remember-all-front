@@ -11,14 +11,13 @@ const StarsBg = () => {
   return (
     <div className='fixed inset-0 z-0 pointer-events-none'>
       <Particle
-
         id="smallStars"
         init={loadingParticle}
         options={{
           background: { color: "#050F0F" },
           fpsLimit: 60,
           particles: {
-            number: { value: 120, density: { enable: true, area: 800 } },
+            number: { value: 180, density: { enable: false, area: 800 } },
             color: { value: ["#ffffff", "#ffddcc", "#ccffdd", "#ccccff", "#ffccff"] },
             shape: { type: "circle" },
             opacity: {
@@ -27,7 +26,7 @@ const StarsBg = () => {
               anim: { enable: true, speed: 1, minimumValue: 0.5, sync: false }
             },
             size: {
-              value: 2,
+              value: 1.7,
               random: { enable: true, minimumValue: 0.5 },
               anim: { enable: false }
             },
@@ -41,7 +40,7 @@ const StarsBg = () => {
             },
             links: {
               enable: true,
-              distance: 60,      // меньше — реже связи
+              distance: 64,      // меньше — реже связи
               color: "random",   // линии будут цветом из палитры частиц
               opacity: 0.35,
               width: 1,
@@ -50,6 +49,7 @@ const StarsBg = () => {
               warp: false,
             }
           },
+          resize: false,
           detectRetina: true
         }}
       />
@@ -61,7 +61,7 @@ const StarsBg = () => {
           background: { color: "transparent" },
           fpsLimit: 60,
           particles: {
-            number: { value: 10, density: { enable: false } },
+            number: { value: 12, density: { enable: false } },
             color: { value: ["#ff7777", "#77ff77", "#7777ff", "#ffff77", "#ff77ff"] },
             shape: { type: "circle" },
             opacity: {
@@ -75,7 +75,7 @@ const StarsBg = () => {
               },
             },
             size: {
-              value: 4,
+              value: 3,
               random: { enable: true, minimumValue: 2 },
               anim: { enable: false },
             },
@@ -95,6 +95,7 @@ const StarsBg = () => {
               blur: 15,
             },
           },
+                    resize: false,
           detectRetina: true,
         }}
       />

@@ -1,4 +1,4 @@
-import axiosInstance from "../../api/axiosInstance";
+import axiosInstance from "@/api/axiosInstance";
 
 export const registerUser = async (userData: { username: string; email: string; password: string }) => {
     const response = await axiosInstance.post("/auth/users/", userData);
@@ -15,7 +15,7 @@ export const logoutUser = async () => {
     return response.data;
 }
 
-export const verifyToken = async (token: string) => {
-    const response = await axiosInstance.post("/auth/jwt/verify/", { token });
+export const verifyToken = async () => {
+    const response = await axiosInstance.post("/auth/jwt/verify/");
     return response.data;
 }

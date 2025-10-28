@@ -6,7 +6,7 @@ const AuthorizationPage = () => {
 const [isRegistrationOpen, setIsRegistrationOpen] = React.useState(false)
 
   return (
-    <div >
+    <div className="relative h-screen flex items-center justify-center">
         {
           isRegistrationOpen ? <RegistrationPopup onClick={()=>{setIsRegistrationOpen(!isRegistrationOpen)}}/> :
         <LoginPopup onClick={()=>{setIsRegistrationOpen(!isRegistrationOpen)}}/>
