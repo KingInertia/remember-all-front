@@ -1,16 +1,16 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 /* //#145757  133835*/
 @theme {
-  --color-primary: #00FFDE;
+  --color-primary: #00ffde;
   --color-primaryDark: #124175;
-  --color-secondary: #133835; 
-  --color-textWhite: #D9FFF9;
-  --color-textOrange: #F9ECCC;
-  --color-textBoxWhite: #D9FFF9;
-  --color-blockNoteMenu: #0E2B28;
-  --color-primaryBlocks: #0A2239;
-  --color-lightningWhite: #66FFE9;
-  --color-neonRed: #FF2E63;
+  --color-secondary: #133835;
+  --color-textWhite: #d9fff9;
+  --color-textOrange: #f9eccc;
+  --color-textBoxWhite: #d9fff9;
+  --color-blockNoteMenu: #0e2b28;
+  --color-primaryBlocks: #0a2239;
+  --color-lightningWhite: #66ffe9;
+  --color-neonRed: #ff2e63;
   --container-center: true;
   --container-padding: 1rem;
   --container-padding-sm: 2rem;
@@ -18,9 +18,8 @@
 
 @layer base {
   .text-outline {
-    -webkit-text-stroke: 3px #D9FFF9;
+    -webkit-text-stroke: 3px #d9fff9;
   }
-
 }
 
 @layer components {
@@ -28,30 +27,28 @@
     @apply h-[34px] w-[34px] flex rounded-full items-center justify-center cursor-pointer
                bg-primary/30 p-2 hover:scale-110 duration-200;
   }
-  
 }
 
-
-.green-scroll-bar  {
+.green-scroll-bar {
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch; 
-  scrollbar-width: thin; 
-  scrollbar-color: rgba(100,100,100,0.6) transparent; 
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 100, 100, 0.6) transparent;
 }
 
 .green-scroll-bar ::-webkit-scrollbar {
   width: 10px;
 }
-.green-scroll-bar [contenteditable="true"]::-webkit-scrollbar-track {
+.green-scroll-bar [contenteditable='true']::-webkit-scrollbar-track {
   background: transparent;
 }
-.green-scroll-bar [contenteditable="true"]::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.4);
+.green-scroll-bar [contenteditable='true']::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4);
   background-clip: padding-box;
 }
 
-.my-blocknote [contenteditable="true"] {
+.my-blocknote [contenteditable='true'] {
   box-sizing: border-box;
   margin: 0;
-  padding: 0; 
+  padding: 0;
 }
